@@ -5,9 +5,9 @@ export default class Ogrenci {
         this.ad = ad
     }
 
-    adiniSoyle() {
+    async adiniSoyle() {
         console.log(`onun adi : ${this.ad}`)
-        axios.get('https://jsonplaceholder.typicode.com/comments')
+        await axios.get('https://jsonplaceholder.typicode.com/comments')
             .then(r => {
                 console.log(r)
             })
