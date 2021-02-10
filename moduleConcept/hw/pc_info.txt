@@ -1,0 +1,4 @@
+cpu sayisi: 4
+bos hafiza: 1403822080
+toplam rem: 25009446912
+kullanilan : 23605882880
