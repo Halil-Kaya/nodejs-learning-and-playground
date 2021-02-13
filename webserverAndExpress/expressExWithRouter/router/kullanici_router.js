@@ -92,7 +92,7 @@ const kullaniciBilgileriKontrol = (user) => {
         ad: Joi.string().min(3).max(30).required(),
         yas: Joi.number().integer().min(10).max(99).required()
     })
-    return schema.validate(req.body)
+    return schema.validate(user)
 }
 
 
