@@ -1,10 +1,17 @@
 const express = require('express')
 const Joi = require('@hapi/joi')
+    //morgan log icin kullanilan bir middleware
+const morgan = require('morgan')
 
 const app = express()
 
 //req.body deki kısımları kullanmak icin bu satiri yazmak
 app.use(express.json())
+app.use(express.urlencoded())
+app.use(express.static('public'))
+
+//isteklerimin ne zaman hangi url de oldugunu gostermesi icin morgan i common ozelligiyle middleware ime ekliyorum
+app.use(morgan('common'))
 
 const kullanicilar = [
     { id: 1, ad: 'halil', yas: 21 },
