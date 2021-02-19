@@ -1,0 +1,21 @@
+@BASE_URL = http://localhost:3000/
+
+GET {{BASE_URL}}
+
+###
+GET {{BASE_URL}}2?sortBy=name
+
+###
+POST {{BASE_URL}}
+Content-Type: application/json
+
+{
+    "isim" : "halil",
+    "yas" : 21
+}
+
+###
+POST {{BASE_URL}}
+Content-Type: application/x-www-form-urlencoded
+
+isim=halil&yas=21
