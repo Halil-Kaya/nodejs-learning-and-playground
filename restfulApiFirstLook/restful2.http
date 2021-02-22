@@ -1,6 +1,7 @@
 @BASE_URL = http://localhost:3000/api
 
 GET {{BASE_URL}}/users
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDMyZTAwOTAyYjFiZDYyMzQwNDA1ZjgiLCJlbWFpbCI6Imhsa0BnbWFpbC5jb20iLCJpYXQiOjE2MTM5NDc0NzcsImV4cCI6MTYxMzk1MTA3N30.wJLHafDxnadQqvXEv_51THZIs2DRNHg1YalH3H8iF3o
 
 ###
 GET {{BASE_URL}}/users/2
@@ -10,21 +11,37 @@ POST {{BASE_URL}}/users
 Content-Type: application/json
 
 {
-    "isim" : "halil",
-    "email" : 21,
-    "userName" : "hlk",
+    "isim" : "hqlsil",
+    "email" : "he@gmail.com",
+    "userName" : "hwqdlk",
+    "sifre" : "123456"
+}
+
+###
+POST {{BASE_URL}}/users/giris
+Content-Type: application/json
+
+{
+    "email" : "hlk@gmail.com",
     "sifre" : "123456"
 }
 
 
 ###
-PATCH  {{BASE_URL}}/users/602efb2c9df3cf7597831651
+PATCH  {{BASE_URL}}/users/60303d0bdd90ebe35a8375b4
 Content-Type: application/json
 
 {
-    "isim" : "halil",
-    "yas" : 21,
-    "userName" : "hlk"
+    "email" : "21@gmail.com"
+}
+
+###
+PATCH  {{BASE_URL}}/users/me
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDMwNzU4ZWEwOGIyYjFiMzNlZWI5ZGUiLCJlbWFpbCI6Imhsa0BnbWFpbC5jb20iLCJpYXQiOjE2MTM5NDYwNTEsImV4cCI6MTYxMzk0OTY1MX0.LuZ_rFQbPlwlbWDhhchC3W91OzF8ACY8fjFUMXPhl8o
+
+{
+    "email" : "211qqqqqq@gmail.com"
 }
 
 ###
@@ -36,3 +53,9 @@ Content-Type: application/json
     "yas" : 21,
     "userName" : "hlk"
 }
+
+###
+DELETE {{BASE_URL}}/users/deleteAll
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDMyZTAwOTAyYjFiZDYyMzQwNDA1ZjgiLCJlbWFpbCI6Imhsa0BnbWFpbC5jb20iLCJpYXQiOjE2MTM5NDc4OTEsImV4cCI6MTYxMzk1MTQ5MX0.euh7t4B7X7P_HwgFn5gsIXgjJ87EMRHk7QxnvuXZ1os
+

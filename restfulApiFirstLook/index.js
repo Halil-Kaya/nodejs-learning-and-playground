@@ -1,5 +1,7 @@
 const express = require('express')
 require('./db/dbConnection')
+const jwt = require('jsonwebtoken')
+
 
 //Routes
 const userRouter = require('./router/userRouter')
@@ -15,10 +17,16 @@ app.use('/api/users', userRouter)
 
 app.use(hataMiddleware)
 
+function testAuth(params) {
+    const token = jwt.sign({ _userID: 'yeniKullaniciIdsi', isAdmin: true, aktif: true }, 'SecretKeyafWQCF', { expiresIn: '2h' })
 
-app.get('/', (req, res) => {
-    res.status(200).json({ 'mesaj': 'first step' })
-})
+    console.log(token);
+    let decoded = jwt.verify(token, 'SecretKeyafWQCF')
+    console.log(decoded);
+}
+
+testAuth()
+
 
 app.listen(3000, () => {
     console.log('3000 portundan server baslatildi');

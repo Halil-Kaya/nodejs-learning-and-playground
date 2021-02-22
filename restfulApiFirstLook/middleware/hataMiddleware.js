@@ -15,7 +15,7 @@ const hataYakalayici = (err, req, res, next) => {
     if (err.code === 11000) {
 
         return res.json({
-            message: JSON.stringify(err.keyValue) + ' unique olmalıdır',
+            message: Object.keys(err.keyValue) + " icin girdiginiz " + Object.values(err.keyValue) + ' unique olmalıdır',
             hataKodu: 400
         })
 
@@ -28,7 +28,7 @@ const hataYakalayici = (err, req, res, next) => {
 
     } else {
 
-        return res.statusCode(err.statusCode || 400)
+        return res.status(err.statusCode || 400)
             .json({
                 hataKodu: err.statusCode || 400,
                 message: err.message

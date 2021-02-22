@@ -1,70 +1,38 @@
 const router = require('express').Router()
-const User = require('../models/userModel')
 
-const createError = require('http-errors')
+const userController = require('../controllers/userController')
 
-router.get('/', async(req, res) => {
-    const allUsers = await User.find({})
-    res.json(allUsers)
-})
-
-router.get('/:id', (req, res) => {
-    res.json({ mesaj: 'id si : ' + req.params.id + 'olan user listelenecek' })
-})
-
-router.post('/', async(req, res) => {
-
-    try {
-
-        const eklenecekUser = new User(req.body)
-        const result = await eklenecekUser.save()
-        return res.send(result)
-
-    } catch (err) {
-
-        console.log('user kaydederken hata oldu' + err);
-        return res.json(err)
-    }
-
-})
-
-router.patch('/:id', async(req, res, next) => {
+const authMiddleware = require('../middleware/authMiddleware')
+const adminMiddleware = require('../middleware/adminMiddleware')
 
 
-    try {
+//tum kullanicilari sadece admin listeleyebilir
+router.get('/', [authMiddleware, adminMiddleware], userController.tumUserlariListele)
 
-        const result = await User.findByIdAndUpdate(req.params.id, req.body, { new: true, runValidators: true })
-        if (result) {
-            return res.json(result)
-        } else {
-            return res.status(404).send('boyle bir kullanici yok')
-        }
+//oturum acan user bilgilerini listeler
+router.get('/me', authMiddleware, userController.oturumAcanKullaniciBilgileri)
 
-    } catch (err) {
-        next(createError(err))
-    }
-})
+//oturum acan user guncelleme islemleri
+router.patch('/me', authMiddleware, userController.oturumAcanKullaniciGuncelleme)
 
-router.delete('/:id', async(req, res, next) => {
 
-    try {
+router.post('/', userController.yeniKullaniciOlustur)
 
-        const result = await User.findByIdAndDelete({ _id: req.params.id })
 
-        if (result) {
-            return res.send(result)
-        } else {
-            //return res.status(404).send('boyle bir kullanici yok')
-            throw createError(404, 'kullanici bulunamadi')
-        }
+router.post('/giris', userController.girisYap)
 
-    } catch (err) {
 
-        next(createError(err))
+router.patch('/:id', userController.adminUserGuncelleme)
 
-    }
 
-})
+router.delete('/deleteAll', [authMiddleware, adminMiddleware], userController.tumKullanicilariSil)
+
+
+router.delete('/me', authMiddleware, userController.kullaniciKendiniSiler)
+
+
+router.delete('/:id', userController.yoneticiKullaniciSil)
+
 
 
 module.exports = router
