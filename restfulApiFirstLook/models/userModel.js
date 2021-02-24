@@ -105,7 +105,7 @@ UserSchema.statics.joiValidationForUpdate = function(userObject) {
 //islemler sonucunda bana butun obje donuyor bunlarin belli basli kisimlarini dondurmek isteyebilirim
 //toJSON metodu datayi dondurmeden once calisiyor buraya otomatik girip gorunmesini istemedigim kisimlarini objeden silip
 //oyle datayi donduruyorum
-UserSchema.methods.toJSON = function(userObject) {
+UserSchema.methods.toJSON = function() {
 
     const user = this.toObject()
     delete user._id

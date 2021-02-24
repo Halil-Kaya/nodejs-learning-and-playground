@@ -3,6 +3,9 @@ const bcrypt = require('bcrypt')
 const User = require('../models/userModel')
 
 const tumUserlariListele = async(req, res) => {
+    console.log('test: ');
+    const test = await User.find({ isim: 'halil' })
+    console.log(test.length);
     const allUsers = await User.find({})
     res.json(allUsers)
 }
