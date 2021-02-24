@@ -3,8 +3,10 @@ const createError = require('http-errors')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 const Joi = require('@hapi/joi')
+const { func } = require('@hapi/joi')
 
-const Todo = require('./todoModel')
+
+
 
 
 const Schema = mongoose.Schema
@@ -57,8 +59,11 @@ const UserSchema = new Schema({
     },
     usersBlocked: {
         type: [{ _blockedUserId: String, blockedTime: { type: Date, default: Date.now } }],
+    },
+    todos: {
+        type: [{ todoName: String, createdTime: { type: Date, default: Date.now } }]
     }
-}, { collation: 'Users', timestamps: true })
+}, { collection: 'Users', timestamps: true })
 
 
 //burda required kullanmiyorum cunku bazi yerlerde sadece bazi bolgeler benim isime yariyor
@@ -80,8 +85,7 @@ UserSchema.methods.generateToken = async function() {
 
 //yeni bir user eklerken bu validationu kullaniyorum burda butun bilgiler gerekli oldugu icin required diyiyorum
 UserSchema.statics.joiValidation = (userObject) => {
-    schema.required()
-    return schema.validate(userObject)
+    return schema.required().validate(userObject)
 }
 
 //update icin bu validationu kullaniyorum burda kisinin gonderdigi kisimlari kontrol ettigim icin required kismini koymuyorum
@@ -173,35 +177,24 @@ UserSchema.statics.getAllUsers = async() => {
 UserSchema.statics.getUserProfile = async(userId) => {
 
 
-    const user = await User.findById(userId, { _id: 1, fullName: 1, userName: 1, email: 1, createdAt: 1 })
+    const user = await User.findById(userId, { _id: 1, fullName: 1, userName: 1, email: 1, createdAt: 1, todos: 1 })
 
 
     if (!user) {
         throw createError(400, 'Boye bir kullanici yok')
     }
 
-    const todos = await Todo.getTodosByIdUserId(userId)
-    return {
-        user,
-        todos
-    }
+    return user
 }
 
 //butun kullanicilar todolariyla beraber gelir
 UserSchema.statics.getAllUsersWithTodos = async() => {
 
-    const users = await User.getAllUsers()
-    return await Promise.all(users.map(async(user) => {
-        let todos = await Todo.getTodosByIdUserId(user._id)
-        return {
-            user,
-            todos
-        }
-    }))
+    return await User.find({}, { _id: 1, fullName: 1, userName: 1, email: 1, createdAt: 1, todos: 1 })
 
 }
 
-UserSchema.statics.getById = async(userId) => {
+UserSchema.statics.getUserById = async(userId) => {
 
     const user = await User.findById(userId)
 
@@ -215,20 +208,239 @@ UserSchema.statics.getById = async(userId) => {
 }
 
 UserSchema.statics.createUser = async(newUser) => {
-
+    console.log(newUser);
     const { error, value } = User.joiValidation(newUser)
-
+    console.log(error);
     if (error) {
 
-        throw createError(400, 'Bilgiler Gecersiz')
+        throw createError(400, 'Bilgiler Gecersiz : ' + error)
 
     }
 
     value.password = await bcrypt.hash(value.password, 10)
 
     const user = new User(value)
-    return await user.save()
 
+    return await user.save()
+}
+
+UserSchema.methods.createTodo = async function(newTodo) {
+
+    const user = this.toObject()
+
+
+    let isNewTodoUnique = user.todos.every(todo => todo.todoName.toLowerCase() != newTodo.toLowerCase())
+
+    if (isNewTodoUnique) {
+
+        user.todos.push({ todoName: newTodo, createdTime: Date.now() })
+
+    } else {
+
+        throw createError(400, 'Kullanici Boyle bir todoya zaten sahip')
+
+    }
+
+    await User.findByIdAndUpdate(user._id, user)
+
+}
+
+UserSchema.statics.checkUser = async(userId) => {
+
+    const user = await User.findById(userId)
+
+    return user != null
+
+}
+
+UserSchema.methods.updateUser = async function(updatedUser) {
+
+    updatedUser = updatedUser.toObject()
+
+    delete updatedUser.isAdmin
+    delete updatedUser._id
+    delete updatedUser.isBlocked
+    delete updatedUser.usersDeleted
+    delete updatedUser.usersBlocked
+    delete updatedUser.createdAt
+    delete updatedUser.updatedAt
+    delete updatedUser.isDeleted
+    delete updatedUser.__v
+
+    await User.findByIdAndUpdate(this._id, updatedUser)
+}
+
+UserSchema.statics.getTodosOfUser = async(userId) => {
+
+    const user = await User.getUserById(userId)
+
+    return user.todos
+}
+
+UserSchema.methods.deleteTodos = async function(todos) {
+
+    todos = todos.map(todo => todo.toLowerCase())
+
+    const user = this.toObject()
+
+    user.todos = user.todos.filter(todo => {
+        if (!todos.includes(todo.todoName.toLowerCase())) return true
+    })
+
+    await User.findByIdAndUpdate(this._id, user)
+}
+
+UserSchema.statics.getAdmins = async() => {
+    return await User.find({ isAdmin: true })
+}
+
+
+UserSchema.methods.addDeletedUserToAdmin = async function(userIdToDelete) {
+
+    const adminUser = this.toObject()
+
+    if (!adminUser.isAdmin) {
+
+        throw createError(400, 'Bunu yapmaya yetkin yok! sen admin degilsin')
+
+    }
+
+    const userToDelete = await User.findById(userIdToDelete)
+
+    if (!userToDelete) {
+
+        throw createError(400, 'Boyle bir kullanici yok')
+
+    }
+
+    userToDelete.isDeleted = true
+
+    const isIdUnique = adminUser.usersDeleted.every(id => id._deletedUserId != userIdToDelete)
+
+    if (isIdUnique) {
+        adminUser.usersDeleted.push({ _deletedUserId: userIdToDelete, deletedTime: Date.now() })
+    }
+
+    await User.findByIdAndUpdate(adminUser._id, adminUser)
+
+    await User.findByIdAndUpdate(userIdToDelete, userToDelete)
+
+}
+
+UserSchema.methods.addBlockedUserToAdmin = async function(userIdToBlock) {
+
+    const adminUser = this.toObject()
+
+    if (!adminUser.isAdmin) {
+
+        throw createError(400, 'Bunu yapmaya yetkin yok! sen admin degilsin')
+
+    }
+
+    const userToBlock = await User.findById(userIdToBlock)
+
+    if (!userToBlock) {
+
+        throw createError(400, 'Boyle bir kullanici yok')
+
+    }
+
+    userToBlock.isBlocked = true
+
+    const isIdUnique = adminUser.usersBlocked.every(id => id._blockedUserId != userIdToBlock)
+
+    if (isIdUnique) {
+        adminUser.usersBlocked.push({ _blockedUserId: userIdToBlock, deletedTime: Date.now() })
+    }
+
+    await User.findByIdAndUpdate(adminUser._id, adminUser)
+
+    await User.findByIdAndUpdate(userIdToBlock, userToBlock)
+
+}
+
+UserSchema.methods.unblockUser = async function(blcokedUserId) {
+
+    const adminUser = this.toObject()
+
+    if (!adminUser.isAdmin) {
+
+        throw createError(400, 'Bunu yapmaya yetkin yok! sen admin degilsin')
+
+    }
+
+    const userToUnblock = await User.findById(blcokedUserId)
+
+    if (!userToUnblock) {
+
+        throw createError(400, 'Boyle bir kullanici yok')
+
+    }
+    userToUnblock.isBlocked = false
+
+    await User.findByIdAndUpdate(userToUnblock._id, userToUnblock)
+
+
+
+    const adminWhoBlockeUser = (await User.find({ "usersBlocked._blockedUserId": blcokedUserId }))[0]
+
+    if (!adminWhoBlockeUser) {
+        return
+    }
+
+
+    adminWhoBlockeUser.usersBlocked = adminWhoBlockeUser.usersBlocked.filter(blockedUser => {
+        if (blockedUser._blockedUserId != blcokedUserId) return true
+    })
+
+    await User.findByIdAndUpdate(adminWhoBlockeUser._id, adminWhoBlockeUser)
+}
+
+
+UserSchema.methods.deleteUser = async function() {
+    const user = this.toObject()
+    user.isDeleted = true
+    await User.findByIdAndUpdate(this._id)
+}
+
+UserSchema.statics.getAdminProfile = async(adminId) => {
+
+    const adminUser = await User.findById(adminId)
+
+    if (!adminUser) throw createError(400, 'Boyle bir kullanici yok')
+
+
+    if (!adminUser.isAdmin) throw createError(400, 'Boyle bir yetkiye sahip degilsin')
+
+    return adminUser
+}
+
+UserSchema.methods.makeAdmin = async function(newAdminUserId) {
+
+    const adminUser = this.toObject()
+
+    if (!adminUser.isAdmin) throw createError(400, 'Boyle bir yetkiye sahip degilsin')
+
+    const newAdminUser = await User.findById(newAdminUserId)
+
+    if (!newAdminUser) throw createError(400, 'Boyle bir kullanici yok')
+
+    newAdminUser.isAdmin = true
+
+    await User.findByIdAndUpdate(newAdminUserId, newAdminUser)
+
+}
+
+UserSchema.statics.getAllTodos = async() => {
+
+    const todosObjecArr = await User.find({}, { "_id": 0, "todos": 1, "createdTime": 1 })
+
+    let todosArr = []
+    todosObjecArr.forEach(item => {
+        todosArr = todosArr.concat(item.todos)
+    })
+
+    return todosArr
 }
 
 
