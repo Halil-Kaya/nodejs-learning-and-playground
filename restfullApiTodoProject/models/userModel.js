@@ -78,7 +78,7 @@ const schema = Joi.object({
 UserSchema.methods.generateToken = async function() {
 
     const loggedUser = this
-    const token = await jwt.sign({ _id: loggedUser._id }, 'secretKey', { expiresIn: '2h' })
+    const token = await jwt.sign({ _id: loggedUser._id }, 'SecretKey', { expiresIn: '2h' })
     return token
 
 }
@@ -443,6 +443,15 @@ UserSchema.statics.getAllTodos = async() => {
     return todosArr
 }
 
+UserSchema.statics.isAdmin = async(userId) => {
+    const user = await User.findById(userId)
+    if (!user) throw createError(400, 'Boyle bir kullanici yok')
+    return user.isAdmin
+}
+
+UserSchema.statics.getAllAdmins = async() => {
+    return await User.find({ isAdmin: true })
+}
 
 const User = mongoose.model('Users', UserSchema)
 

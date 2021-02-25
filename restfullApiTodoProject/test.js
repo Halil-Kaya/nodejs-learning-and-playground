@@ -43,7 +43,11 @@ const test = async() => {
 
     //await admin.makeAdmin('6036bb2348343e3e10e8c2d9')
 
-    await User.getAllTodos()
+    //await User.getAllTodos()
+
+    const t = await User.getAllAdmins()
+    console.log(t);
+
 
     //await user.deleteTodos(['hello'])
 

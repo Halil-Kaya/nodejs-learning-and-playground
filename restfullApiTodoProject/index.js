@@ -15,10 +15,14 @@ const app = express()
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
+
 app.use('/api/users', userRouter)
 app.use('/api/admin', adminRouter)
 app.use('/api/todos', todoRouter)
 
+app.use((req, res, next) => {
+    return res.json({ message: 'Boyle bir endpoint yok' })
+})
 
 app.use(errorMiddleware)
 
