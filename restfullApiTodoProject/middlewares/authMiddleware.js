@@ -13,12 +13,12 @@ const authCheck = (req, res, next) => {
         //token i aliyorum
         const token = req.header('Authorization').replace('Bearer ', '')
 
+
         //token i decoded ediyorum
-        const decodedToken = jwt.verify(token, 'SecretKeyq')
+        const decodedToken = jwt.verify(token, 'SecretKey')
 
         //requeste ekleyip sonraki middleware geciyorum
-        req.userId = decodedToken._id
-
+        req._id = decodedToken._id
         next()
 
     } catch (err) {

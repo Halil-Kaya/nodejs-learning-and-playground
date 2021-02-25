@@ -97,7 +97,7 @@ UserSchema.statics.joiValidationForUpdate = (userObject) => {
 //kullanici burda giris yapiyor
 UserSchema.statics.logIn = async(email, password) => {
 
-    const { error, value } = schema.validate({ email, sifre })
+    const { error, value } = schema.validate({ email, password })
 
     //validate hatali ise hata donuyorum (bu metodu cagirdigim yer try catch blogu icinde)
     if (error) {
@@ -132,6 +132,7 @@ UserSchema.statics.logIn = async(email, password) => {
 
     //eger sifre gecersiz ise hata donduruyorum
     if (!passwordCheck) {
+        console.log('sifre hatali');
 
         throw createError(400, 'Girilen email/sifre hatali')
 
@@ -208,7 +209,17 @@ UserSchema.statics.getUserById = async(userId) => {
 }
 
 UserSchema.statics.createUser = async(newUser) => {
-    console.log(newUser);
+
+    delete newUser.isAdmin
+    delete newUser.isDeleted
+    delete newUser.isBlocked
+    delete newUser.usersDeleted
+    delete newUser.usersBlocked
+    delete newUser.todos
+    delete newUser.createdAt
+    delete newUser.updatedAt
+    delete newUser.__v
+
     const { error, value } = User.joiValidation(newUser)
     console.log(error);
     if (error) {
@@ -225,6 +236,8 @@ UserSchema.statics.createUser = async(newUser) => {
 }
 
 UserSchema.methods.createTodo = async function(newTodo) {
+
+    if (!newTodo) throw createError(400, 'Bir todo giriniz')
 
     const user = this.toObject()
 
@@ -266,6 +279,11 @@ UserSchema.methods.updateUser = async function(updatedUser) {
     delete updatedUser.updatedAt
     delete updatedUser.isDeleted
     delete updatedUser.__v
+
+    if (updatedUser.password) {
+        updatedUser.password = await bcrypt.hash(updatedUser.password, 10)
+    }
+
 
     await User.findByIdAndUpdate(this._id, updatedUser)
 }

@@ -51,8 +51,9 @@ const blockUser = async(req, res, next) => {
     try {
 
         const admin = await User.getAdminProfile(req._id)
-
-        await admin.addBlockedUserToAdmin(res.query.q)
+        console.log('-------------------------------');
+        console.log(req.query);
+        await admin.addBlockedUserToAdmin(req.query.q)
 
         return res.json({ message: 'Kisi blocklandi' })
 
@@ -67,7 +68,7 @@ const unblockUser = async(req, res, next) => {
 
         const admin = await User.getAdminProfile(req._id)
 
-        await admin.unblockUser(res.query.q)
+        await admin.unblockUser(req.query.q)
 
         return res.json({ message: `${req._id} li kisinin engeli kaldirildi` })
 
