@@ -1,0 +1,10 @@
+<%- include('_header')%>
+
+<h1>Hello</h1>
+<h2>
+    <%= course %>
+    <% users.forEach(user => { %>
+    <%=user.id%>
+    <% }) %>
+    <%-include('_footer',{site : 'hlk.com'}) %>
+</h2>

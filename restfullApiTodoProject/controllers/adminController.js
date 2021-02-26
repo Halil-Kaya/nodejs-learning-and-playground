@@ -36,7 +36,7 @@ const deleteUser = async(req, res, next) => {
 
         const admin = await User.findById(req._id)
 
-        await admin.addDeletedUserToAdmin(res.query.q)
+        await admin.addDeletedUserToAdmin(req.query.q)
 
         return res.json({ message: 'Kisi silindi' })
 
