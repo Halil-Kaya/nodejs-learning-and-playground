@@ -1,3 +1,31 @@
 <%- include('../partials/_header')%>
 
-    <h1 class="title is-1">Tum makaleler</h1>
+<div class="columns is-multiline"> 
+
+<% makaleler.forEach((makale,index) => { %>
+    
+    <div class="column is-4">
+
+        <%- include('../partials/_makale_card',{makale,index})  %> 
+    
+    </div>
+
+
+
+<% }) %>
+
+</div>
+
+
+<%
+    const sayfaSayisi = sayfalama["x-wp-totalpages"]
+    const toplamVeriSayisi = sayfalama["x-wp-total"]
+
+%>
+
+<div class="block"></div>
+    <div class="column is-12">
+        <%- include('../partials/_pagination',{sayfaSayisi,toplamVeriSayisi,aktifPage}) %>
+    </div>
+<div class="block"></div>
+

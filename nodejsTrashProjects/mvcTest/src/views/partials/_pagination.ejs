@@ -1,0 +1,33 @@
+
+<% if (sayfaSayisi >1) { %>
+  <nav class="pagination is-medium" role="navigation" aria-label="pagination">
+      <a <%=aktifPage != 1 ? `href=/blog/?page=${(aktifPage-1)}` :''%> class="pagination-previous" <%= aktifPage == 1 ? 'disabled':'' %> >Önceki</a>
+      <a <%=aktifPage != sayfaSayisi ? `href=/blog/?page=${(parseInt(aktifPage)+1)}` :''%> class="pagination-next"  <%= aktifPage == sayfaSayisi ? 'disabled':'' %>>Sonraki</a>
+      <ul class="pagination-list">
+        
+        <% for( let index = 1; index <= sayfaSayisi; index++ ) { %>
+          
+          <li>
+            
+            <% if (index == aktifPage) { %>
+
+              <a href="#" class="pagination-link is-current" aria-label="Goto page"><%- index %> </a>
+            
+            <% }else{ %>
+
+                <a href="/blog?page=<%-index%>" class="pagination-link" aria-label="Goto page"><%- index %> </a>
+
+            <%} %>
+
+
+
+          
+          </li>
+
+        <% } %>
+        
+        
+      </ul>
+  </nav>
+
+<% } %>

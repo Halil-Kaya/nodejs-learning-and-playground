@@ -3,8 +3,6 @@ const createError = require('http-errors')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 const Joi = require('@hapi/joi')
-const { func } = require('@hapi/joi')
-
 
 
 

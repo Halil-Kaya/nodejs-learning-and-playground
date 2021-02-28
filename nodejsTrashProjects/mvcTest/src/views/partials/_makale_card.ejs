@@ -1,0 +1,48 @@
+<% 
+
+  let yukseklik = ''
+
+  if(index == undefined){
+
+    yukseklik = "600"
+
+  }else{
+
+    const mod = index%10
+
+    yukseklik = "60" + mod
+  }
+
+
+%> 
+
+<div class="card">
+    <div class="card-image">
+      <figure class="image is-4by3">
+        <img src="https://source.unsplash.com/random/800x<%=yukseklik%> " alt="Placeholder image">
+      </figure>
+    </div>
+    <div class="card-content">
+      <div class="media">
+        <div class="media-content">
+          <p class="title is-4"><%- makale.title.rendered %> </p>
+        </div>
+      </div>
+  
+      <div class="content">
+
+        <% let makaleIcerik = makale.excerpt.rendered %>
+
+        <%if(index == undefined){ %>
+        <%-makaleIcerik  %> 
+        <%}else{  %> 
+        
+        <% let ozet = makaleIcerik.slice(0,50)%>  
+        <%- ozet%>         
+        <a href="/blog/<%-makale.id%>">Devamını Oku</a>
+        <%}  %> 
+        
+        <hr>
+      </div>
+    </div>
+  </div>
