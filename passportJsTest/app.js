@@ -6,7 +6,7 @@ const flash = require('connect-flash')
 
 //db baglantisi
 require('./src/config/database')
-
+const MongoDBStore = require('connect-mongodb-session')(session)
 
 //routers 
 const authRouter = require('./src/routers/auth_router')
@@ -18,14 +18,20 @@ const path = require('path')
 
 const app = express()
 
+const sessionStore = new MongoDBStore({
+    uri:process.env.MONGODB_CONNECTION_STRING,
+    collection : 'mySessions'
+})
+
 //session ve flash message
 app.use(session({
     secret : process.env.SESSION_SECRET,
     resave : false,
     saveUninitialized : true,
     cookie : {
-        maxAge : 1000
-    }
+        maxAge : 1000 * 60 * 60 * 24
+    },
+    store : sessionStore
 }))
 
 app.use(flash())
