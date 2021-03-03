@@ -25,6 +25,22 @@ const validateNewUser = () => {
         ]
 }
 
+const validateLogin = () => {
+    return [
+
+        body('email')
+            .trim()    
+            .isEmail().withMessage('Gecerli Bir Mail Giriniz'),
+        body('sifre')
+            .trim()
+            .isLength({min:6}).withMessage('Sifre en az 6 karakter olmali')
+            .isLength({max : 20}).withMessage('Sifre en fazla 20 karakter olmali'),
+
+    ]
+
+}
+
 module.exports = {
-    validateNewUser
+    validateNewUser,
+    validateLogin
 }

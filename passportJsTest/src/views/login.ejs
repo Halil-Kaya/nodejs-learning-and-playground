@@ -11,15 +11,19 @@
                         <div class="p-5">
                             <div class="text-center">
                                 <h1 class="h4 text-gray-900 mb-4">Hoş Geldiniz</h1>
+                                <% if (validation_errors != undefined || success_message != undefined || login_error != undefined) { %>
+                                    <%- include('./partials/_mesaj')  %> 
+                                <% } %>
+                                
                             </div>
                             <form class="user" action="/login" method="POST">
                                 <div class="form-group">
-                                    <input type="email" name="email" class="form-control form-control-user"
+                                    <input type="email" value="<%- email != ''?email:''%>" name="email" class="form-control form-control-user"
                                         id="exampleInputEmail" aria-describedby="emailHelp"
                                         placeholder="Emailiniz">
                                 </div>
                                 <div class="form-group">
-                                    <input type="password" name="sifre" class="form-control form-control-user"
+                                    <input type="password" value="<%- sifre != ''?sifre:''%>" name="sifre" class="form-control form-control-user"
                                         id="exampleInputPassword" placeholder="sifreniz">
                                 </div>
                                 <div class="form-group">
