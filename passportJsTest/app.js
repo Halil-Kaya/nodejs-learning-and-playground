@@ -28,7 +28,6 @@ app.use(express.static('public'))
 app.set('view engine','ejs')
 app.set('views',path.resolve(__dirname,'./src/views'))
 
-
 const sessionStore = new MongoDBStore({
     uri:process.env.MONGODB_CONNECTION_STRING,
     collection : 'mySessions'
@@ -61,12 +60,8 @@ app.use((req,res,next) => {
     next()
 })
 
-
 app.use(passport.initialize())
 app.use(passport.session())
-
-
-
 
 app.get('/',(req,res) => {
 
