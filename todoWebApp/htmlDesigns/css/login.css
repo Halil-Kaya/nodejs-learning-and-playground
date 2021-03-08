@@ -1,0 +1,111 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap');
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-size: 1.1em;
+    font-family: 'Montserrat', sans-serif;
+}
+
+html,
+body {
+    height: 100%;
+    width: 100%;
+    background: url('../images/gemi.jpg');
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container {
+    min-width: 500px;
+    background-color: rgba(37, 23, 39, 0.815);
+    height: 75%;
+    width: 40%;
+    border-radius: 75px;
+    border: 3px rgb(32, 168, 161) dotted;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.accent {
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    height: 80%;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.accent-title-item {
+    width: 100%;
+    text-align: center;
+    flex-grow: 0;
+}
+
+.accent-title-text {
+    padding: 5%;
+    color: white;
+    text-transform: uppercase;
+}
+
+.accent-form {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 90%;
+    align-items: center;
+}
+
+.accent-form input {
+    border-radius: 8px;
+    padding: 2%;
+    outline: none;
+    border: 1px solid rgb(32, 168, 161);
+}
+
+.btn {
+    background-color: rgb(32, 168, 161);
+    border: none;
+    border-radius: 50px;
+    color: white;
+    width: 40%;
+    height: 10%;
+    align-items: center;
+    cursor: pointer;
+    outline: none;
+}
+
+.btn:hover {
+    background-color: rgb(49, 218, 209);
+    outline: none;
+}
+
+.accent-links {
+    list-style: none;
+    flex-grow: 0;
+    display: flex;
+    font-size: 1rem;
+    justify-content: space-between;
+}
+
+.accent-links li a {
+    text-decoration: none;
+    font-size: 1.3rem;
+    color: white;
+}
+
+.accent-links li a:hover {
+    color: tomato;
+}
+
+.accent-links-item {
+    width: 80%;
+}
+
+@media all and (max-width:1100px) {
+    .container {}
+}
