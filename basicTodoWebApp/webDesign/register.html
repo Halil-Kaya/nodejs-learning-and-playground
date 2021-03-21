@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
+
+</head>
+
+<body>
+
+    <header class="header">
+        <nav class="nav-menu">
+            <ul>
+                <li>
+                    <a class="logo" href="index.html">
+                        TODOAPP
+                    </a>
+                </li>
+                <li class="search">
+                    <form action="">
+                        <input type="search" placeholder="Kişi Ara...">
+                        <button><i class="fa fa-search"></i></button>
+                    </form>
+
+                </li>
+                <li>
+                    <a href="login.html">Giriş</a>
+                </li>
+                <li>
+                    <a href="register.html">Kaydol</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="register-section">
+
+        <div class="register-card">
+            <div class="message">
+                <i id="infoMessageTimeIcon" class="fa fa-times"></i>
+                <span>Hey Bir Şeyler Yanlış Gitti sasdafsad</span>
+            </div>
+            <form action="">
+                <div class="input-place">
+                    <label for="ad">Ad</label>
+                    <input type="text" required id="ad">
+                </div>
+                <div class="input-place">
+                    <label for="soyad">Soyad</label>
+                    <input type="text" required id="soyad">
+                </div>
+                <div class="input-place">
+                    <label for="username">Kullanıcı adı</label>
+                    <input type="text" required id="username">
+                </div>
+                <div class="input-place">
+                    <label for="mail">Mail</label>
+                    <input type="email" required id="mail">
+                </div>
+                <div class="input-place">
+                    <label for="sifre">Şifre</label>
+                    <input type="password" required id="sifre">
+                </div>
+                <div class="input-place">
+                    <label for="resifre">Şifre Tekrar</label>
+                    <input type="password" required id="resifre">
+                </div>
+
+                <input class="btn" type="submit" value="Kaydol">
+            </form>
+        </div>
+
+    </section>
+
+</body>
+
+</html>

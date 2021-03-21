@@ -5,7 +5,6 @@ const authController = require('../controllers/auth_controller')
 const validatorMiddleware = require('../middlewares/validation_middleware')
 const authMiddleware = require('../middlewares/auth_middleware')
 
-
 router.get('/login',authMiddleware.oturumAcilmamis,authController.loginFormunuGoster)
 
 router.post('/login',authMiddleware.oturumAcilmamis,validatorMiddleware.validateLogin(),authController.login)

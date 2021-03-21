@@ -78,7 +78,6 @@ app.use('/',authRouter)
 
 app.use('/yonetim' ,yonetimRouter)
 
-
 app.listen(process.env.PORT,() => {
     console.log(`server ${process.env.PORT} portundan ayaga kalkti`);
 })

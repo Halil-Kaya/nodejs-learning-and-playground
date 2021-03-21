@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/css/style.css">
+
+    <style>
+        
+        
+        /* .checkbox{
+            display: inline-block;
+            width: 100px;
+            height: 40px;
+            background-color: turquoise;
+            border-radius: 40px;
+            position: relative;;
+        }
+
+
+
+        .check-btn{
+            display: inline-block;
+            width: 12px;
+            background-color: coral;
+            height: 12px;
+            border-radius: 50%;
+            position: absolute;
+            top: 3px;
+
+        }
+
+
+        input{
+            display: none;
+        } */
+         .checkbox{
+            display: inline-block;
+            width: 100px;
+            height: 40px;
+            background-color: #ddd;
+            border-radius: 40px;
+            position: relative;
+            transition: 500ms background-color;
+        }
+
+         .check-btn{
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background-color: tomato;
+            position: absolute;
+            left: 5px;
+            top: 5px;
+            transition: 500ms left,500ms background-color;
+        }
+
+        label input:checked + .checkbox{
+            background-color: tomato ;
+        }
+
+        label input:checked + .checkbox .check-btn{
+            background-color: #ddd;
+            left: 65px;
+        }
+
+        input{
+            display: none;
+        } 
+
+
+    </style>
+
+</head>
+
+<body>
+
+    <label>
+        <input type="checkbox">
+        <div class="checkbox">
+            <span class="check-btn"></span>
+        </div>
+    </label>
+
+</body>
+
+</html>
