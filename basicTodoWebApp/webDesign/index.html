@@ -112,78 +112,27 @@
                         <span>Tarih</span>
                     </div>
                 </div>
-                <div class="content-card">
-                    <h3 class="card-todo">Todo Yapılacak Bir şey</h3>
-                    <div class="card-footer">
-                        <a href="#">username</a>
-                        <span>Tarih</span>
-                    </div>
-                </div>
-                <div class="content-card">
-                    <h3 class="card-todo">Todo Yapılacak Bir şey</h3>
-                    <div class="card-footer">
-                        <a href="#">username</a>
-                        <span>Tarih</span>
-                    </div>
-                </div>
-                <div class="content-card">
-                    <h3 class="card-todo">Todo Yapılacak Bir şey</h3>
-                    <div class="card-footer">
-                        <a href="#">username</a>
-                        <span>Tarih</span>
-                    </div>
-                </div>
-                <div class="content-card">
-                    <h3 class="card-todo">Todo Yapılacak Bir şey</h3>
-                    <div class="card-footer">
-                        <a href="#">username</a>
-                        <span>Tarih</span>
-                    </div>
-                </div>
-                <div class="content-card">
-                    <h3 class="card-todo">Todo Yapılacak Bir şey</h3>
-                    <div class="card-footer">
-                        <a href="#">username</a>
-                        <span>Tarih</span>
-                    </div>
-                </div>
-                <div class="content-card">
-                    <h3 class="card-todo">Todo Yapılacak Bir şey</h3>
-                    <div class="card-footer">
-                        <a href="#">username</a>
-                        <span>Tarih</span>
-                    </div>
-                </div>
-                <div class="content-card">
-                    <h3 class="card-todo">Todo Yapılacak Bir şey</h3>
-                    <div class="card-footer">
-                        <a href="#">username</a>
-                        <span>Tarih</span>
-                    </div>
-                </div>
-                <div class="content-card">
-                    <h3 class="card-todo">Todo Yapılacak Bir şey</h3>
-                    <div class="card-footer">
-                        <a href="#">username</a>
-                        <span>Tarih</span>
-                    </div>
-                </div>
-                <div class="content-card">
-                    <h3 class="card-todo">Todo Yapılacak Bir şey</h3>
-                    <div class="card-footer">
-                        <a href="#">username</a>
-                        <span>Tarih</span>
-                    </div>
-                </div>
-                <div class="content-card">
-                    <h3 class="card-todo">Todo Yapılacak Bir şey</h3>
-                    <div class="card-footer">
-                        <a href="#">username</a>
-                        <span>Tarih</span>
-                    </div>
-                </div>
+
             </li>
         </ul>
+
+        <div class="page">
+            
+            <a href="#" class="previousPage">«</a>
+
+            <select name="" class="pageCount" id="pageCount">
+                <option value="">1</option>
+                <option value="">2</option>
+                <option value="" selected>3</option>
+                <option value="">4</option>
+            </select>
+            <span>/</span>
+            <a href="#" class="totalPage">163</a>
+            <a href="#" class="nextPage">»</a>
+            
+            
+
+        </div>
 
     </section>
 
@@ -194,11 +143,16 @@
     </div>
 
     <script>
-        const infoMessageTimeIcon = document.querySelector("#infoMessageTimeIcon")
+        const pageCount = document.querySelector("#pageCount")
 
-        infoMessageTimeIcon.addEventListener("click", (e) => {
-            e.target.parentElement.remove()
+        pageCount.addEventListener("click",(e)=>{
+
+            console.log(e.target.selectedIndex);
+            //window.location.href = "http://example.com/new_url";
         })
+
+             
+
     </script>
 
 </body>

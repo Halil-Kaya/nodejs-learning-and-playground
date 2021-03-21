@@ -334,8 +334,9 @@ body{
 
 .add-todo{
     position: sticky;
+    bottom: 50px;
     right: 50px;
-    top: 50px;
+    margin-left: auto;
 }
 
 .add-todo a{
@@ -347,6 +348,50 @@ body{
     align-items: center;
     border-radius: 50%;
 }
+
 .add-todo a i{
     color: #fff;
+    font-size: 24px;
+}
+
+.page{
+    padding: 20px;
+    display: flex;
+    margin-left: auto;
+    justify-content: center;
+    align-items: center;
+}
+
+.page a{
+    margin-left: 20px;
+}
+
+.page .pageCount{
+    margin-left: 20px;
+    margin-right: 20px;
+    padding: 8px;
+    background-color: #fff;
+    border: 1px solid rgba(0, 0, 0, .4);
+}
+
+.page span{
+    font-size: 24px;
+}
+
+.page .totalPage{
+    font-size: 18px;
+    border: 1px solid rgba(0, 0, 0, .4);
+    padding: 8px;
+
+}
+
+
+.page .previousPage,
+.page .nextPage{
+    font-size: 32px;
+}
+
+.page .previousPage:hover,
+.page .nextPage:hover{
+    color: #28527a;
 }
