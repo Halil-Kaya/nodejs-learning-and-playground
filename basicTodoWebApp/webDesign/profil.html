@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
+
+</head>
+
+<body>
+
+    <header class="header">
+        <nav class="nav-menu">
+            <ul>
+                <li>
+                    <a class="logo" href="index.html">
+                        TODOAPP
+                    </a>
+                </li>
+                <li class="search">
+                    <form action="">
+                        <input type="search" placeholder="Kişi Ara...">
+                        <button><i class="fa fa-search"></i></button>
+                    </form>
+
+                </li>
+                <li>
+                    <a href="login.html">Giriş</a>
+                </li>
+                <li>
+                    <a href="register.html">Kaydol</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="profil-content">
+
+        <h2>Account</h2>
+        <span></span>
+        <div class="message">
+            <i id="infoMessageTimeIcon" class="fa fa-times"></i>
+            <span>Hey Bir Şeyler Yanlış Gitti sasdafsad</span>
+        </div>
+
+        <div class="info-boxs">
+            <div class="box">
+                <label for="username">Username</label>
+                <input type="text" class="block-input" id="username" value="asdasdsad">
+            </div>
+            <div class="box">
+                <label for="adi">Adı</label>
+                <input type="text" class="block-input" id="adi" value="asdasdsad">
+            </div>
+            <div class="box">
+                <label for="soyadi">Soyadı</label>
+                <input type="text" class="block-input" id="soyadi" value="asdasdsad">
+            </div>
+            <div class="box">
+                <label for="email">Email</label>
+                <input type="text" class="block-input" id="email" value="asdasdsad">
+            </div>
+
+        </div>
+
+    </section>
+
+    <!--giriş yapmış kullanıcının gördüğü-->
+    <section class="profil-content">
+
+        <h2>Account</h2>
+        <span></span>
+
+        <form action="">
+            <div class="info-boxs">
+                <div class="box">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" required value="asdasdsad">
+                </div>
+                <div class="box">
+                    <label for="adi">Adı</label>
+                    <input type="text" id="adi" required value="asdasdsad">
+                </div>
+                <div class="box">
+                    <label for="soyadi">Soyadı</label>
+                    <input type="text" id="soyadi" required value="asdasdsad">
+                </div>
+                <div class="box">
+                    <label for="email">Email</label>
+                    <input type="text" id="email" required value="asdasdsad">
+                </div>
+
+            </div>
+
+            <div class="update-section">
+                <a href="#">Şifre Güncelle</a>
+                <input type="submit" value="Güncelle" name="" id="">
+            </div>
+
+        </form>
+
+    </section>
+
+
+    <script>
+
+        const infoMessageTimeIcon = document.querySelector("#infoMessageTimeIcon")
+
+        infoMessageTimeIcon.addEventListener("click",(e) => {
+            e.target.parentElement.remove()
+        })
+
+
+    </script>
+
+</body>
+
+</html>

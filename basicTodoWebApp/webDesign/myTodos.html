@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
+</head>
+
+<body>
+
+    <header class="header">
+        <nav class="nav-menu">
+            <ul>
+                <li>
+                    <a class="logo" href="index.html">
+                        TODOAPP
+                    </a>
+                </li>
+                <li>
+                    <a class="todos" href="#">
+                        My Todos
+                    </a>
+                </li>
+                <li class="search">
+                    <form action="">
+                        <input type="search" placeholder="Kişi Ara...">
+                        <button><i class="fa fa-search"></i></button>
+                </li>
+                <li>
+                    <span class="username-span">UserName</span>
+                </li>
+                <li class="menu">
+                    <img src="./img/menu.png" alt="menu">
+                    <div class="dropdown">
+                        <ul>
+                            <li>
+                                <a href="#">Profil</a>
+                            </li>
+                            <li>
+                                <a href="#">Cıkış Yap</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+
+    <section class="my-todos-contect">
+
+        <div class="message">
+            <i id="infoMessageTimeIcon" class="fa fa-times"></i>
+            <span>Hey Bir Şeyler Yanlış Gitti sasdafsad</span>
+        </div>
+        <form action="">
+            <div class="add-todo">
+                <input class="add-todo-input" type="text" placeholder="Add Todo...">
+                <input class="add-todo-btn" type="submit" value="Add Todo">
+            </div>
+        </form>
+
+
+        <div class="users-todos">
+
+            <ul>
+                <li>
+                    <div class="todo-card">
+                        <input type="hidden" value="id">
+                        <label class="">
+                            <input type="checkbox" class="todo-checkbox">
+                            <span class="todo-title">TODO</span>
+
+                        </label>
+                        <button class="todo-btn update-btn">Update</button>
+                        <button class="todo-btn delete-btn">Delete</button>
+                    </div>
+                </li>
+                <li>
+                    <div class="todo-card">
+                        <input type="hidden" value="id">
+                        <label class="done">
+                            <input type="checkbox" class="todo-checkbox">
+                            <span class="todo-title">TODO</span>
+                        </label>
+                        <button class="todo-btn update-btn">Update</button>
+                        <button class="todo-btn delete-btn">Delete</button>
+                    </div>
+                </li>
+                <li>
+                    <div class="todo-card">
+                        <input type="hidden" value="id">
+                        <label class="done">
+                            <input type="checkbox" class="todo-checkbox">
+                            <span class="todo-title">TODO</span>
+                        </label>
+                        <button class="todo-btn update-btn">Update</button>
+                        <button class="todo-btn delete-btn">Delete</button>
+                    </div>
+                </li>
+            </ul>
+
+        </div>
+
+        <button class="save-btn">Kaydet</button>
+
+    </section>
+
+    <script>
+        const infoMessageTimeIcon = document.querySelector("#infoMessageTimeIcon")
+
+        infoMessageTimeIcon.addEventListener("click", (e) => {
+            e.target.parentElement.remove()
+        })
+    </script>
+
+
+</body>
+
+</html>

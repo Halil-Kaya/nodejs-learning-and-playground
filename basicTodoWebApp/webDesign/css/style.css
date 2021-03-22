@@ -66,15 +66,17 @@ html,body{
 body{
     display: flex;
     flex-direction: column;
+
     position: relative;
 }
 
 .header{
     background-color: #28527a;
     padding: 0 60px;
-    position: fixed;
+    position: sticky;
     width: 100%;
     top: 0;
+    z-index: 50;
 }
 
 .header .nav-menu .logo{
@@ -398,4 +400,267 @@ body{
 .page .previousPage:hover,
 .page .nextPage:hover{
     color: #28527a;
+}
+
+/*
+    myTodos
+*/
+
+.my-todos-contect{
+    margin-top: 48px;
+    margin-bottom: 480px;
+    background-color: #aacef0;
+    width: 800px;
+    margin-left:auto;
+    margin-right: auto;
+    display: flex;
+    flex-direction: column;
+    border-radius: 12px;
+}
+
+.my-todos-contect .add-todo{
+    display: flex;
+    margin: 0 24px;
+    border-radius: 8px;
+    overflow: hidden;
+    margin-top: 24px;
+
+}
+
+.my-todos-contect .add-todo .add-todo-input{
+    flex: 1;
+    padding: 12px;
+}
+
+.my-todos-contect .add-todo .add-todo-btn{
+    padding: 12px;
+    background-color: darkviolet;
+    color: #fff;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: bold;
+    transition: all 500ms;
+}
+
+.my-todos-contect .add-todo .add-todo-btn:hover{
+    color: darkviolet;
+    background-color: #fff;
+}
+
+.my-todos-contect .users-todos{
+    margin: 40px 12px;
+}
+.my-todos-contect .users-todos ul {
+    display: flex;
+    flex-direction: column;
+}
+
+.my-todos-contect .users-todos ul li .todo-card{
+    display: flex;
+    background-color: rgb(217, 255, 242);
+    padding: 16px 24px;
+    border-radius: 12px;
+    margin-bottom: 12px;
+    align-items: center;
+    justify-self: center;
+}
+
+.my-todos-contect .users-todos ul li .todo-card:hover{
+    background-color: rgba(217, 255, 242,.5);
+
+}
+
+.my-todos-contect .users-todos ul li .todo-card .todo-checkbox{
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+}
+
+
+.my-todos-contect .users-todos ul li .todo-card .todo-btn{
+    padding: 8px;
+    margin-left: 22px;
+    border-radius: 8px;
+    color: #fff;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+}
+.my-todos-contect .users-todos ul li .todo-card .todo-btn.update-btn{
+    background-color: chocolate;
+}
+
+.my-todos-contect .users-todos ul li .todo-card .todo-btn.delete-btn{
+    background-color: rgb(255, 62, 62);
+}
+
+
+.my-todos-contect .users-todos ul li .todo-card label{
+    margin-right: auto;
+    font-size: 18px;
+    font-weight: bold;
+    color: red;
+    margin-left: 12px;
+    cursor: pointer;
+    display: flex;
+    justify-self: center;
+    align-content: center;
+
+}
+.my-todos-contect .users-todos ul li .todo-card label .todo-checkbox{
+    margin-right: 8px;
+}
+
+
+
+.my-todos-contect .users-todos ul li .todo-card label.done{
+    color: green;
+    text-decoration:line-through;
+}
+
+.my-todos-contect .save-btn{
+    margin-bottom: 24px;
+    font-size: 18px;
+    padding: 18px 48px;
+    margin-left: 24px;
+    margin-right: 24px;
+    background-color: blue;
+    color: #fff;
+    border-radius: 12px;
+    cursor: pointer;
+}
+
+.search-result-content{
+    display: flex;
+    flex-direction: column;
+    width: 850px;
+    margin-left: auto;
+    margin-right: auto;
+    height: 50px;
+    margin-top: 64px;
+    border-radius: 12px;
+}
+
+.search-result-content .title{
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 12px;
+    margin-bottom: 24px;
+    background-color: indianred;
+    color: #fff;
+    font-size: 24px;
+    font-weight: 800;
+}
+
+.search-result-content ul{
+    display: flex;
+    flex-direction: column;
+}
+
+.search-result-content ul li{
+    border-bottom: 1px solid gray;
+}
+
+.search-result-content ul li a{
+    display: flex;
+    justify-content: space-between;
+    color: black;
+    padding: 24px 12px;
+    font-size: 18px;
+}
+
+.search-result-content ul li:hover{
+    background-color: rgb(128, 169, 231);
+}
+
+/*
+    Profil sayfasi
+*/
+
+.profil-content{
+    display: flex;
+    flex-direction: column;
+    padding: 80px 120px;
+}
+
+.profil-content h2{
+    font-size: 48px;
+}
+
+.profil-content > span{
+    height: 1px;
+    width: 100%;
+    background-color: blueviolet;
+    margin: 20px 0;
+}
+
+.profil-content .info-boxs{
+    display: flex;
+    flex-direction: column;
+    width: 1200px;
+}
+
+.profil-content .info-boxs .box{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 36px;
+    align-items: center;
+}
+.profil-content .info-boxs .box label{
+    font-size: 24px;
+    display: flex;
+    cursor: pointer;
+}
+
+.profil-content .info-boxs .box input{
+    font-size: 24px;
+    padding: 12px;
+    background-color: green;
+}
+
+.profil-content .info-boxs .box input.block-input{
+    pointer-events:none;
+    background-color: rgb(195, 195, 195);
+
+}
+
+.profil-content form .update-section{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 48px;
+    font-size: 24px;
+}
+
+.profil-content form .update-section a{
+    display: block;
+    background-color: indianred;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 24px 12px;
+    border-radius: 12px;
+    transition: 500ms all;
+}
+
+.profil-content form .update-section a:hover{
+    background-color: rgb(255, 51, 51);
+}
+
+.profil-content form .update-section input{
+    display: block;
+    background-color: rgb(165, 189, 28);
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 24px 12px;
+    border-radius: 12px;
+    transition: 500ms all;
+    cursor: pointer;
+}
+
+.profil-content form .update-section input:hover{
+    background-color: rgb(110, 128, 9);
+
 }
