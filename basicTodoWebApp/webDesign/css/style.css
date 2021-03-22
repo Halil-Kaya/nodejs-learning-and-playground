@@ -73,7 +73,7 @@ body{
 .header{
     background-color: #28527a;
     padding: 0 60px;
-    position: sticky;
+    position: fixed;
     width: 100%;
     top: 0;
     z-index: 50;
@@ -407,7 +407,7 @@ body{
 */
 
 .my-todos-contect{
-    margin-top: 48px;
+    margin-top: 120px;
     margin-bottom: 480px;
     background-color: #aacef0;
     width: 800px;
@@ -537,7 +537,7 @@ body{
     margin-left: auto;
     margin-right: auto;
     height: 50px;
-    margin-top: 64px;
+    margin-top: 120px;
     border-radius: 12px;
 }
 
@@ -662,5 +662,55 @@ body{
 
 .profil-content form .update-section input:hover{
     background-color: rgb(110, 128, 9);
+}
 
+/*
+    resetPassword html
+*/
+
+.reset-password-section{
+    display: flex;
+    flex-direction: column;
+    width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 120px;
+    background-color: #28527a;
+    padding: 12px 80px;
+}
+
+.reset-password-section .form-section{
+    margin-top: 24px;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+
+.reset-password-section .form-section label{
+    font-size: 24px;
+    color: #fff;
+    margin-bottom: 8px;
+}
+
+.reset-password-section .form-section input{
+    font-size: 18px;
+    padding: 4px 12px;
+    width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 18px;
+}
+
+.reset-password-section .form-section input.btn-update{
+    padding: 10px 0;
+    margin-left: 8px;
+    margin-right: 8px;
+    background-color: blueviolet;
+    color: #fff;
+    border-radius: 5px;
+    font-size: 24px;
+    font-weight: bold;
+    margin-left: auto;
+    margin-right: auto;
 }
