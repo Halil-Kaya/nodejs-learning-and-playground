@@ -59,6 +59,9 @@ img {
     box-sizing: border-box;
 }
 
+html,body{
+    height: 100%;
+}
 
 body{
     display: flex;
@@ -69,7 +72,8 @@ body{
 .header{
     background-color: #28527a;
     padding: 0 60px;
-    position: sticky;
+    position: fixed;
+    width: 100%;
     top: 0;
 }
 
@@ -295,6 +299,7 @@ body{
     flex: 1;
     width: 600px;
     margin: auto;
+    margin-top: 80px;
 }
 
 .content ul li .content-card{
@@ -384,7 +389,6 @@ body{
     padding: 8px;
 
 }
-
 
 .page .previousPage,
 .page .nextPage{
