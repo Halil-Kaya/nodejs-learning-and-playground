@@ -1,0 +1,4 @@
+tsc -init   -> typescript icin configure dosyasini olusturuyor
+olusan tsconfig.json dosyasinin icine "moduleResolution": "Node",  bunu eklemen lazim
+typescriptin require i algilamasi icin -> npm install --save-dev @types/node
+npm install --save-dev @types/express
