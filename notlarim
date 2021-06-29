@@ -1,3 +1,4 @@
 sudo mongod --dbpath /var/lib/mongodb/ --journal    -> baglanmak icin
 
 mongo -> terminalde veri tabanina baglanmak icin
+github undo a commit -> git reset HEAD~
